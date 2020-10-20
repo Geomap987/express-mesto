@@ -6,7 +6,7 @@ const jsonUsersPath = path.join(__dirname, '..', 'data', 'users.json')
 router.get('/users', (req, res) => {
     readData(jsonUsersPath)
     .then(data => res.send(data))
-    .catch((err) => console.log(err))
+    .catch(() => res.status(500).send({ message: 'Ошибка чтения файла' }))
 })
 
 router.get('/users/:id', (req, res) => {
@@ -21,7 +21,7 @@ router.get('/users/:id', (req, res) => {
             }
             res.send(user)
         })
-        .catch((err) => console.log(err))
+        .catch(() => res.status(500).send({ message: 'Ошибка чтения файла' }))
 })
 
 module.exports = router
