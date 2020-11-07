@@ -61,6 +61,8 @@ const updateUserName = (req, res) => {
         const errorList = Object.keys(err.errors);
         const messages = errorList.map((item) => err.errors[item].message);
         res.status(400).send({ message: `Ошибка валидации: ${messages.join(' ')}` });
+      } else if (err.reason === null) {
+        res.status(400).send({ message: 'Неподходящий тип данных' });
       } else {
         res.status(500).send({ message: 'Ошибка на сервере' });
       }
@@ -79,6 +81,8 @@ const updateUserAvatar = (req, res) => {
         const errorList = Object.keys(err.errors);
         const messages = errorList.map((item) => err.errors[item].message);
         res.status(400).send({ message: `Ошибка валидации: ${messages.join(' ')}` });
+      } else if (err.reason === null) {
+        res.status(400).send({ message: 'Неподходящий тип данных' });
       } else {
         res.status(500).send({ message: 'Ошибка на сервере' });
       }
