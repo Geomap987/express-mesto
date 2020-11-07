@@ -49,8 +49,46 @@ const createUser = (req, res) => {
     });
 };
 
+const updateUserName = (req, res) => {
+  const { name, about } = req.body;
+  const { id } = req.user;
+  User.findByIdAndUpdate(id, { name, about }, {
+    runValidators: true,
+  })
+    .then((data) => res.send(data))
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        const errorList = Object.keys(err.errors);
+        const messages = errorList.map((item) => err.errors[item].message);
+        res.status(400).send({ message: `Ошибка валидации: ${messages.join(' ')}` });
+      } else {
+        res.status(500).send({ message: 'Ошибка на сервере' });
+      }
+    });
+};
+
+const updateUserAvatar = (req, res) => {
+  const { avatar } = req.body;
+  const { id } = req.user;
+  User.findByIdAndUpdate(id, { avatar }, {
+    runValidators: true,
+  })
+    .then((data) => res.send(data))
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        const errorList = Object.keys(err.errors);
+        const messages = errorList.map((item) => err.errors[item].message);
+        res.status(400).send({ message: `Ошибка валидации: ${messages.join(' ')}` });
+      } else {
+        res.status(500).send({ message: 'Ошибка на сервере' });
+      }
+    });
+};
+
 module.exports = {
   getUsers,
   getUserById,
   createUser,
+  updateUserName,
+  updateUserAvatar,
 };
