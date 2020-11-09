@@ -58,9 +58,18 @@ const addLike = (req, res) => {
     },
   }, { new: true })
     .populate('likes')
-    .then((card) => res.send(card))
+    .then((card) => {
+      if (!card) {
+        res.status(404).send({ message: 'Нет карточки с таким id' });
+      } else {
+        res.send({ message: card });
+      }
+    })
     .catch((err) => {
-      res.send(err);
+      if (err.kind === 'ObjectId') {
+        return res.status(400).send({ message: 'Неправильный id' });
+      }
+      res.status(500).send({ message: 'Ошибка на сервере' });
     });
 };
 
@@ -72,9 +81,18 @@ const deleteLike = (req, res) => {
       likes: id,
     },
   }, { new: true })
-    .then((card) => res.send(card))
+    .then((card) => {
+      if (!card) {
+        res.status(404).send({ message: 'Нет карточки с таким id' });
+      } else {
+        res.send({ message: card });
+      }
+    })
     .catch((err) => {
-      res.send(err);
+      if (err.kind === 'ObjectId') {
+        return res.status(400).send({ message: 'Неправильный id' });
+      }
+      res.status(500).send({ message: 'Ошибка на сервере' });
     });
 };
 
