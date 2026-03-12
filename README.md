@@ -1,14 +1,14 @@
-# Проект Mesto бэкенд
+# Mesto Backend
 
-## Директории
+## Directories
 
-`/public` — статика, полученная в результате билда фронтенд-приложения на Реакте  
-`/data` — JSON-файлы для временной эмуляции работы с базой данных  
-`/routes` — папка с файлами роутера  
-  
-Остальные директории вспомогательные, создаются при необходимости разработчиком
+`/public` — static files generated from the build of the React frontend application  
+`/data` — JSON files used to temporarily simulate working with a database  
+`/routes` — folder containing router files  
 
-## Запуск проекта
+All other directories are auxiliary and are created by the developer as needed.
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+## Running the project
+
+`npm run start` — starts the server  
+`npm run dev` — starts the server with hot reload
